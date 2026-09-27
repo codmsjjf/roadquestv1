@@ -42,13 +42,17 @@ jobs:
               -keyalg RSA -keysize 2048 -validity 10000 \
               -dname "CN=Android Debug,O=Android,C=US"
           fi
-
-      - name: Write .env
+          
+     - name: Write .env
         working-directory: roadquest
         run: |
           cat > .env << EOF
           MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}
           GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          EOF
+          cat > .env.example << EOF
+          MAPS_API_KEY=DEFAULT_MAPS_API_KEY
+          GEMINI_API_KEY=MY_GEMINI_API_KEY
           EOF
 
       - name: Build debug APK
